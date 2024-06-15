@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube Enhancer",
+    "version": "1.0",
+    "permissions": [
+      "storage",
+      "activeTab",
+      "tabs",
+      "scripting"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["*://www.youtube.com/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ],
+    "content_security_policy": {
+      "script-src": ["'self'", "https://cdn.jsdelivr.net"]
+    },
+    "host_permissions": [
+      "*://www.youtube.com/*"
+    ]
+  }
+  
