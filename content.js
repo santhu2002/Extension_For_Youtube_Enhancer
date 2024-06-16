@@ -17,9 +17,12 @@ function scrollToNextShort() {
 }
 
 // Start auto-scrolling if enabled
-chrome.storage.sync.get(['autoScrollEnabled'], function (result) {
+chrome.storage.sync.get(['autoScrollEnabled','autoPauseEnabled'], function (result) {
   if (result.autoScrollEnabled) {
     startAutoScroll();
+  }
+  if (result.autoPauseEnabled) {
+    togglePauseVideo(result.autoPauseEnabled);
   }
 });
 
