@@ -2,7 +2,7 @@ let autoScrollInterval;
 
 function autoScroll() {
     const video = document.querySelector('video.video-stream.html5-main-video[src]');
-    console.log('Auto-scrolling...',video);
+    // console.log('Auto-scrolling...',video);
     if (video) {
       video.removeAttribute('loop');
       video.addEventListener('ended', scrollToNextShort);
@@ -58,6 +58,20 @@ function resumeVideo() {
         video.play();
     }
 }
+
+
+window.addEventListener('yt-navigate-start', function () {
+    // console.log('yt-navigate-start');
+    chrome.storage.sync.get(['autoScrollEnabled','autoPauseEnabled'], function (result) {
+      // console.log('yt-navigate-start',result);
+        if (result.autoScrollEnabled) {
+            startAutoScroll();
+        }
+        if (result.autoPauseEnabled) {
+            togglePauseVideo(result.autoPauseEnabled);
+        }
+    });
+});
 
 
 
